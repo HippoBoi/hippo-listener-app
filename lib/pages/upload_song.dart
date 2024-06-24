@@ -1,8 +1,7 @@
-import 'dart:io';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:hippo_music_app/audio_player.dart';
+import 'package:hippo_music_app/pages/songs_list.dart';
+import 'package:hippo_music_app/song_storage.dart';
 
 class UploadSong extends StatefulWidget {
   const UploadSong({super.key});
@@ -12,33 +11,19 @@ class UploadSong extends StatefulWidget {
 }
 
 class UploadSongState extends State<UploadSong> {
-  String? _fileURL;
-  final AudioPlayer _audioPlayer = AudioPlayer();
+  final List<String> _songsList = [];
+  final AudioPlayerService _audioPlayerService = AudioPlayerService();
 
   Future<void> _pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-        type: FileType.custom, allowedExtensions: ["mp3", "ogg", "wav"]);
+    List<String> songs = await SongStorage.pickFile();
 
-    if (result != null) {
-      File file = File(result.files.single.path!);
-      Directory directory = await getApplicationDocumentsDirectory();
-      String directoryPath = directory.path;
-      final localFile = File("$directoryPath/${file.uri.pathSegments.last}");
-      await file.copy(localFile.path);
-
-      setState(() {
-        _fileURL = localFile.path;
-      });
-
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Archivo guardado")));
-    }
+    setState(() {
+      _songsList.addAll(songs);
+    });
   }
 
-  void playAudio() async {
-    if (_fileURL != null) {
-      await _audioPlayer.play(UrlSource(_fileURL!));
-    }
+  void playAudio(String songPath) {
+    _audioPlayerService.playAudio(songPath);
   }
 
   @override
@@ -55,13 +40,10 @@ class UploadSongState extends State<UploadSong> {
                   filterQuality: FilterQuality.high,
                   fit: BoxFit.cover,
                 )),
-            const Text("No se encontraron canciones subidas."),
+            const Text("Aquí puedes almacenar tus canciones."),
             const SizedBox(height: 20),
-            ElevatedButton(
-                onPressed: _pickFile, child: const Text("Sube una canción")),
-            if (_fileURL != null)
-              ElevatedButton(
-                  onPressed: playAudio, child: const Icon(Icons.play_arrow)),
+            ElevatedButton(onPressed: _pickFile, child: const Text("Añadir")),
+            SongsList(songs: _songsList, onPlay: playAudio)
           ],
         ),
       ),
