@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "244961256838",
+    "project_id": "music-test-8f230",
+    "storage_bucket": "music-test-8f230.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244961256838:android:ca0929b7c891c33825b807",
+        "android_client_info": {
+          "package_name": "com.example.hippo_music_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdV96vIV6eVbODiJ5assEeaGGvf_p5A28"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
