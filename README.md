@@ -1,16 +1,22 @@
-# hippo_music_app
+# Hippo Lister
 
-A new Flutter project.
+A project made for personal use. You can store **almost** any audio file you wish to.
 
-## Getting Started
+## Compilation
 
-This project is a starting point for a Flutter application.
+**This project was made using Flutter**
 
-A few resources to get you started if this is your first Flutter project:
+1 - Clone the repository
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+2 - Install dependencies
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```flutter pub get```
+
+3.- Run your mobile emulator
+
+4.- Run the app
+
+```flutter run```
+
+## Languages
+- Dart
